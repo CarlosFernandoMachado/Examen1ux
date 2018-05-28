@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>The Social Network</title>
   <meta charset="utf-8">
@@ -9,81 +10,106 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
     ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: rgb(0, 0, 0);
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: rgb(0, 0, 0);
     }
-    
+
     li {
-        float: left;
+      float: left;
     }
-    
+
     li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
     }
-    
+
     li a:hover {
-        background-color: #111;
+      background-color: #111;
     }
-    </style>
+  </style>
 </head>
+<script type="text/javascript">
+  function handleSignUp() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    if (email.length < 4) {
+      alert('Please enter an email address.');
+      return;
+    }
+    if (password.length < 4) {
+      alert('Please enter a password.');
+      return;
+    }
+    // Sign in with email and pass.
+    // [START createwithemail]
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+      // [END_EXCLUDE]
+    });
+    // [END createwithemail]
+  }
+</script>
+
 <body>
-    <ul>
-        <li><a class="active" href="#home">Muro</a></li>
-        <li><a href="#Mensajes">Nuevo Mensaje</a></li>
-        <li><a href="#Autenticacion">Autenticacion</a></li>
-        <li><a href="#Perfil">Perfil</a></li>
-      </ul>
-<div class="container-fluid"  >
-  <h1 style="text-align:center;">The Social Network</h1>
-  <div class="row">
-    <div class="col-sm-3 col-md-4 col-lg-2" style="background-color:rgb(15, 15, 15);">
-            <img src="perfil.png" alt="Mi foto de perfil"width="150" height="142">
-    </div>
-    <div class="col-sm-7 col-md-6 col-lg-6" style="background-color:rgb(255, 255, 255);">
-            <h1 style="font-size:130%;text-align:center;">Diles a todos como te sientes:</h1>
-            <div id="sfcb7wazmsf12eb9j1s7ubmeyz87drwnf22"></div>            
-    </div>
-    <div class="col-sm-2 col-md-2 col-lg-4" style="background-color:rgb(255, 255, 255);">
-        <div id="login_div" class="main-div">
-            <h3>Login</h3>
-            <input type="email" placeholder="Email..." id="email_field" />
-            <input type="password" placeholder="Password..." id="password_field" />
-        
-            <button onclick="login()">Login to Account</button>
-          </div>
-        
-          <div id="user_div" class="loggedin-div">
-            <h3>Welcome User</h3>
-            <p id="user_para">Welcome to Firebase web login. You're currently logged in.</p>
-            <button onclick="logout()">Logout</button>
-          </div>
-        
-        
-        
-          <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-          <script>
-            // Initialize Firebase
-            var config = {
-              apiKey: "AIzaSyBPmZU5GIVK_6iDzROpMaYgUaqVu4FadlY",
-              authDomain: "fir-web-login-8b7c5.firebaseapp.com",
-              databaseURL: "https://fir-web-login-8b7c5.firebaseio.com",
-              projectId: "fir-web-login-8b7c5",
-              storageBucket: "fir-web-login-8b7c5.appspot.com",
-              messagingSenderId: "301701306998"
-            };
-            firebase.initializeApp(config);
-          </script>
-          <script src="index.js"></script>
+  <ul>
+    <li>
+      <a class="active" href="#home">Muro</a>
+    </li>
+    <li>
+      <a href="#Mensajes">Nuevo Mensaje</a>
+    </li>
+    <li>
+      <a href="#Autenticacion">Autenticacion</a>
+    </li>
+    <li>
+      <a href="#Perfil">Perfil</a>
+    </li>
+  </ul>
+  <div class="container-fluid">
+    <h1 style="text-align:center;">The Social Network</h1>
+    <div class="row">
+      <div class="col-sm-3 col-md-4 col-lg-2" style="background-color:rgb(15, 15, 15);">
+        <img src="perfil.png" alt="Mi foto de perfil" width="150" height="142">
+      </div>
+      <div class="col-sm-7 col-md-6 col-lg-6" style="background-color:rgb(255, 255, 255);">
+        <h1 style="font-size:130%;text-align:center;">Diles a todos como te sientes:</h1>
+        <div id="sfcb7wazmsf12eb9j1s7ubmeyz87drwnf22"></div>
+      </div>
+      <div class="col-sm-2 col-md-2 col-lg-4" style="background-color:rgb(255, 255, 255);">
+        <input class="mdl-textfield__input" style="display:inline;width:auto;" type="text" id="email" name="email" placeholder="Email"
+        /> &nbsp;&nbsp;&nbsp;
+        <input class="mdl-textfield__input" style="display:inline;width:auto;" type="password" id="password" name="password" placeholder="Password"
+        />
+        <br/>
+        <br/>
+        <button disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in" name="signin">Sign In</button>
+        <script>
+          function initApp(){
+           document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false); 
+          }
+          window.onload = function() {
+           initApp();
+          };
+        </script>
+      </div>
     </div>
   </div>
-</div>
-    
+
 </body>
+
 </html>

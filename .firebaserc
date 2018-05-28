@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "examen-ux-535ed"
+    "default": "examen-ux-535ed",
+    "Proyecto": "examen-ux-535ed"
   }
 }
