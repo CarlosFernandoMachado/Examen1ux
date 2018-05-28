@@ -68,7 +68,7 @@
           <button class="mdl-button mdl-js-button mdl-button--raised" onclick="Login()" id="quickstart-sign-in" name="signin">Sign In</button>
         <script>
           function Login(){
-            const auth = firbase.auth();
+            const auth = firebase.auth();
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             const promise = auth.signInWithEmailAndPassword(email,password);
