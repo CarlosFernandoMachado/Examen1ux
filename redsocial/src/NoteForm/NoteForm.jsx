@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './NoteForm.css';
-import Note from '../note/note';
 
 class NoteForm extends Component {
     constructor(props) {
