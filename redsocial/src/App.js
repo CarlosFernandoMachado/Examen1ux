@@ -5,21 +5,34 @@ import Note from './Note/Note'
 
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
-    this.state={
+    this.state = {
       notes: [
-        {id: 1, noteContent: "Note 1"},
-        {id: 2, noteContent: "Note 2"},
+        { id: 1, noteContent: "Note 1" },
+        { id: 2, noteContent: "Note 2" },
       ],
     }
   }
   render() {
     return (
       <div className="notesWrapper">
-        <h1>Red Social</h1>
-        <Note noteContent ={} noteId={} key={}/>
+        <div className="notesHeader">
+          <div className="heading"> Red Social</div>
+        </div>
+        <div className="notesBody">
+          {
+            this.state.notes.map((note) => {
+              return (
+                <Note noteContent={note.noteContent} noteId={note.id} key={note.id} />
+              )
+            })
+          }
+        </div>
+        <div className="notesFooter">
+          footer will go here
+      </div>
       </div>
     );
   }
