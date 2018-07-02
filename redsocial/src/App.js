@@ -12,16 +12,28 @@ class App extends Component {
     super(props);
     this.addNote = this.addNote.bind(this);
     this.removeNote = this.removeNote.bind(this);
-
     this.app = firebase.initializeApp(DB_CONFIG);
     this.database = this.app.database().ref().child('notes');
 
     // We're going to setup the React state of our component
     this.state = {
       notes: [],
+      user: {},
     }
   }
-
+  /*}
+  authListener(){
+    DB_CONFIG.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.setState({user});
+      }else{
+        this.setState({user: null});
+      }
+    });
+  }
+  componentDidMount(){
+    this.authListener();
+  }*/
   componentWillMount() {
     const previousNotes = this.state.notes;
 
@@ -58,33 +70,32 @@ class App extends Component {
     console.log("from the parent: " + noteId);
     this.database.child(noteId).remove();
   }
-
-  render() {
-    return (
-      <div className="notesWrapper">
-        <div className="notesHeader">
-          <div className="heading">
-            Red Social
+render() {
+  return (
+    <div className="notesWrapper">
+      <div className="notesHeader">
+        <div className="heading">
+          Red Social
           </div>
-        </div>
-        <div className="notesBody">
-          {
-            this.state.notes.map((note) => {
-              return (
-                <Note noteContent={note.noteContent}
-                  noteId={note.id}
-                  key={note.id}
-                  removeNote={this.removeNote} />
-              )
-            })
-          }
-        </div>
-        <div className="notesFooter">
-          <NoteForm addNote={this.addNote} />
-        </div>
       </div>
-    );
-  }
+      <div className="notesBody">
+        {
+          this.state.notes.map((note) => {
+            return (
+              <Note noteContent={note.noteContent}
+                noteId={note.id}
+                key={note.id}
+                removeNote={this.removeNote} />
+            )
+          })
+        }
+      </div>
+      <div className="notesFooter">
+        <NoteForm addNote={this.addNote} />
+      </div>
+    </div>
+  );
+}
 }
 
 export default App;
