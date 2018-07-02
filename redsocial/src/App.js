@@ -31,7 +31,7 @@ class App extends Component {
           }
         </div>
         <div className="notesFooter">
-          footer will go here
+          <NoteForm/>
       </div>
       </div>
     );
